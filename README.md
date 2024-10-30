@@ -12,7 +12,7 @@ opinions.
  - How can we automate insights into hate speech or hashtags? - Identify specific instances of hate speech and generate relevant hashtags.
 
 ## Flowchart
-![Alt text](relative%20path/to/img.jpg?raw=true "Title")
+![Alt text](Flowchart.png?raw=true "Title")
 
 ## Table of Contents
 - [Project Overview](#project-overview)
