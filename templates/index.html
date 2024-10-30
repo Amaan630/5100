@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS5100 Final Project</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Social media Topic modeling and Hashtag generation using LDA</h1>
+    </header>
+    <main>
+        <p>This project aims to analyze a collection of tweets to uncover underlying topics, 
+            trends, and sentiments. Social media platforms like Twitter contain vast amounts 
+            of unstructured text data that can provide valuable insights into public opinion, 
+            trending topics, and sentiment distribution. We employ the Latent Dirichlet 
+            Allocation (LDA) model to extract latent topics within tweets, followed by various 
+            post-processing analyses to provide a comprehensive view of the data. This pipeline 
+            allows us to transform raw tweets into actionable insights through structured data 
+            analysis and visualization.</p>
+        <p>Enter a text below to generate Tags:</p>
+        <label for="userInput">Enter some text:</label>
+        <input type="text" id="userInput" name="userInput" placeholder="Type something...">
+        <button type="button" id="generateButton">Generate</button>
+        <p id="output"></p>
+    </main>
+    <script>
+        document.getElementById("generateButton").onclick = function() {
+            document.getElementById("output").innerText = "Generate button clicked, but no action taken.";
+        };
+    </script>
+</body>
+</html>
