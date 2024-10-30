@@ -1,4 +1,4 @@
-# Topic Analysis and Sentiment Analysis of Tweets Using LDA
+# Social media Topic modeling and Hashtag generation using LDA
 
 This project is designed to analyze tweets by extracting topics and performing sentiment analysis using Latent Dirichlet Allocation (LDA). The workflow includes tweet extraction, data preprocessing, model training, testing, and several post-processing analyses such as hate speech detection, hashtag generation, and topic-based sentiment analysis.
 

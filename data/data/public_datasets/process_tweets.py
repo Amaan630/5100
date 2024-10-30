@@ -19,18 +19,18 @@ def clean_text(text, hashtags):
 
 # read the input CSV file
 cwd = os.getcwd()
-df = pd.read_csv(f'{cwd}/data/data/public_datasets/unprocessed_tweets.csv')
+df = pd.read_csv(f'{cwd}/data/data/public_datasets/2/unprocessed_tweets.csv')
 
 # extract hashtags from content
-df['tags'] = df['content'].apply(extract_hashtags)
+df['tags'] = df['text'].apply(extract_hashtags)
 
 # remove rows with no hashtags
 df = df.dropna(subset=['tags'])
 
 # clean the text by removing hashtags
-df['text'] = df.apply(lambda row: clean_text(row['content'], row['tags']), axis=1)
+df['text'] = df.apply(lambda row: clean_text(row['text'], row['tags']), axis=1)
 
 # select only the required columns
 result_df = df[['text', 'tags']]
 
-result_df.to_csv(f'{cwd}/data/data/public_datasets/processed_tweets.csv', index=False) 
+result_df.to_csv(f'{cwd}/data/data/public_datasets/2/processed_tweets.csv', index=False) 
