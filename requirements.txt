@@ -2,3 +2,8 @@ tweepy
 python-dotenv
 pyppeteer
 pyppeteer-stealth
+pandas
+nltk
+scikit-learn
+matplotlib
+wordcloud
