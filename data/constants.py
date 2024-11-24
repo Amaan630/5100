@@ -20,19 +20,15 @@ USER_AGENTS = [
 
 
 SEARCH_QUERIES = [
-    "sports",
-    "politics",
-    "technology",
-    "science",
-    "business",
-    "entertainment",
+    # "sports",
+    # "politics",
+    # "technology",
+    # "science",
+    # "business",
+    # "entertainment",
     "health",
     "travel",
     "food",
-    "music",
-    "art",
-    "fashion",
-    "fitness",
     "gaming"
 ]
 

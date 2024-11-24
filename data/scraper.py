@@ -112,11 +112,33 @@ async def collect_tweets(page, max_tweets=10):
     return tweets
 
 async def save_tweets_to_csv(tweets, filename='tweets.csv'):
-    with open(filename, 'w', newline='', encoding='utf-8') as file:
+    data_dir = 'data/data'
+    os.makedirs(data_dir, exist_ok=True)
+    filepath = os.path.join(data_dir, filename)
+    
+    existing_tweets = []
+    
+    # Read existing tweets if file exists
+    if os.path.exists(filepath):
+        with open(filepath, 'r', newline='', encoding='utf-8') as file:
+            reader = csv.DictReader(file)
+            existing_tweets = list(reader)
+    
+    # Merge existing tweets with new tweets, avoiding duplicates
+    all_tweets = existing_tweets.copy()
+    existing_texts = {tweet['text'] for tweet in existing_tweets}
+    
+    for tweet in tweets:
+        if tweet['text'] not in existing_texts:
+            all_tweets.append(tweet)
+            existing_texts.add(tweet['text'])
+    
+    # Write all tweets back to file
+    with open(filepath, 'w', newline='', encoding='utf-8') as file:
         writer = csv.DictWriter(file, fieldnames=['text', 'tags'])
         writer.writeheader()
-        writer.writerows(tweets)
-    print(f"Saved {len(tweets)} tweets to {filename}")
+        writer.writerows(all_tweets)
+    print(f"Saved {len(all_tweets)} tweets to {filepath} ({len(tweets)} new)")
 
 async def scrape_twitter(email, username, password, search_query = None):
     browser = None
