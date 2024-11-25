@@ -3,61 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CS5100 Final Project</title>
+    <title>Social Media Topic Modeling</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <!-- Sidebar -->
-        <nav class="sidebar">
-            <h2>Project Menu</h2>
+    <header class="header">
+        <div class="container">
+            <h1>Social Media Topic Modeling and Hashtag Generation</h1>
+            <p>Discover trends, uncover insights, and generate impactful hashtags effortlessly.</p>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <div class="container">
             <ul>
-                <li><a href="{{ url_for('index') }}">Home</a></li>
-                <li><a href="{{ url_for('dataset_list') }}">Datasets</a></li>
+                <li><a href="#">Home</a></li>
                 <li><a href="#about">About</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
-        </nav>
+        </div>
+    </nav>
 
-        <!-- Main Content -->
-        <main class="content">
-            <header>
-                <h1>Social Media Topic Modeling</h1>
-                <p>Using LDA for Hashtag Generation and Insights</p>
-            </header>
+    <main class="main-content">
+        <section id="about" class="section">
+            <div class="container">
+                <h2>About This Project</h2>
+                <p>This project aims to analyze collections of tweets to identify underlying topics, trends, and sentiments using advanced natural language processing techniques like Latent Dirichlet Allocation (LDA).</p>
+            </div>
+        </section>
 
-            <section class="description">
-                <p>
-                    This project analyzes a collection of tweets to uncover underlying topics, 
-                    trends, and sentiments. Social media platforms like Twitter contain vast 
-                    amounts of unstructured text data that can provide valuable insights into 
-                    public opinion, trending topics, and sentiment distribution.
-                </p>
-                <p>
-                    We employ the Latent Dirichlet Allocation (LDA) model to extract latent topics 
-                    within tweets, followed by various post-processing analyses to provide a 
-                    comprehensive view of the data. This pipeline allows us to transform raw 
-                    tweets into actionable insights through structured data analysis and visualization.
-                </p>
-            </section>
+        <section id="features" class="section">
+            <div class="container">
+                <h2>Key Features</h2>
+                <ul class="features-list">
+                    <li>🚀 Topic Discovery: Understand what people are talking about.</li>
+                    <li>📊 Data Visualization: Gain insights through interactive charts.</li>
+                    <li>🔗 Hashtag Generation: Create impactful hashtags automatically.</li>
+                </ul>
+            </div>
+        </section>
 
-            <section class="interaction">
-                <h2>Generate Hashtags</h2>
-                <label for="userInput">Enter some text:</label>
-                <input type="text" id="userInput" name="userInput" placeholder="Type something...">
-                <button id="generateButton">Generate</button>
-                <p id="output"></p>
-            </section>
-        </main>
-    </div>
+        <section id="contact" class="section">
+            <div class="container">
+                <h2>Contact Us</h2>
+                <p>For more information, email us at <a href="mailto:info@project.com">info@project.com</a>.</p>
+            </div>
+        </section>
+    </main>
 
-    <script>
-        document.getElementById("generateButton").onclick = function () {
-            const inputText = document.getElementById("userInput").value;
-            document.getElementById("output").innerText = inputText
-                ? `Generated tags for: ${inputText}`
-                : "Please enter some text!";
-        };
-    </script>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Social Media Insights. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>
