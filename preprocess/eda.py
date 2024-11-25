@@ -160,7 +160,7 @@ def text_complexity_analysis(df, text_column):
     plt.show()
 
 
-def perform_eda(preprocessed_file, text_column,hashtag_column):
+def perform_eda(preprocessed_file, text_column):
     """Perform all EDA on the preprocessed file."""
     df = pd.read_csv(preprocessed_file)
 
@@ -187,9 +187,3 @@ def perform_eda(preprocessed_file, text_column,hashtag_column):
 
     print("Generating Word Cloud...")
     generate_wordcloud(df, text_column)
-
-    print("Hashtags Analysis....")
-    hashtag_analysis(df, hashtag_column)
-
-    print("Hashtag Co Occurrence Analysis....")
-    hashtag_co_occurrence(df, hashtag_column)
