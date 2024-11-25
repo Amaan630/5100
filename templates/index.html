@@ -5,29 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CS5100 Final Project</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>Social media Topic modeling and Hashtag generation using LDA</h1>
-    </header>
-    <main>
-        <p>This project aims to analyze a collection of tweets to uncover underlying topics, 
-            trends, and sentiments. Social media platforms like Twitter contain vast amounts 
-            of unstructured text data that can provide valuable insights into public opinion, 
-            trending topics, and sentiment distribution. We employ the Latent Dirichlet 
-            Allocation (LDA) model to extract latent topics within tweets, followed by various 
-            post-processing analyses to provide a comprehensive view of the data. This pipeline 
-            allows us to transform raw tweets into actionable insights through structured data 
-            analysis and visualization.</p>
-        <p>Enter a text below to generate Tags:</p>
-        <label for="userInput">Enter some text:</label>
-        <input type="text" id="userInput" name="userInput" placeholder="Type something...">
-        <button type="button" id="generateButton">Generate</button>
-        <p id="output"></p>
-    </main>
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <h2>Project Menu</h2>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('dataset_list') }}">Datasets</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="content">
+            <header>
+                <h1>Social Media Topic Modeling</h1>
+                <p>Using LDA for Hashtag Generation and Insights</p>
+            </header>
+
+            <section class="description">
+                <p>
+                    This project analyzes a collection of tweets to uncover underlying topics, 
+                    trends, and sentiments. Social media platforms like Twitter contain vast 
+                    amounts of unstructured text data that can provide valuable insights into 
+                    public opinion, trending topics, and sentiment distribution.
+                </p>
+                <p>
+                    We employ the Latent Dirichlet Allocation (LDA) model to extract latent topics 
+                    within tweets, followed by various post-processing analyses to provide a 
+                    comprehensive view of the data. This pipeline allows us to transform raw 
+                    tweets into actionable insights through structured data analysis and visualization.
+                </p>
+            </section>
+
+            <section class="interaction">
+                <h2>Generate Hashtags</h2>
+                <label for="userInput">Enter some text:</label>
+                <input type="text" id="userInput" name="userInput" placeholder="Type something...">
+                <button id="generateButton">Generate</button>
+                <p id="output"></p>
+            </section>
+        </main>
+    </div>
+
     <script>
-        document.getElementById("generateButton").onclick = function() {
-            document.getElementById("output").innerText = "Generate button clicked, but no action taken.";
+        document.getElementById("generateButton").onclick = function () {
+            const inputText = document.getElementById("userInput").value;
+            document.getElementById("output").innerText = inputText
+                ? `Generated tags for: ${inputText}`
+                : "Please enter some text!";
         };
     </script>
 </body>
