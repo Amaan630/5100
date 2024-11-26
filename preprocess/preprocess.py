@@ -50,7 +50,7 @@ def clean_text(text):
     text = re.sub(r'\@\w+|\#', '', text)  # Remove mentions and hashtags
     text = re.sub(r'[^A-Za-z\s]', '', text)  # Remove punctuation and numbers
     text = remove_emojis(text)  # Remove emojis
-    text = " ".join([word for word in text.split() if word not in stop_words and word not in {"username", "url","via"}])  # Remove stop words and specific words
+    text = " ".join([word for word in text.split() if word not in stop_words and word not in {"username", "url","via","new"}])  # Remove stop words and specific words
     text = " ".join([lemmatizer.lemmatize(word) for word in text.split()])  # Lemmatization
     return text
 
