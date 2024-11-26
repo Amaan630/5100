@@ -3,11 +3,13 @@
 {% block title %}Datasets - X Platform{% endblock %}
 
 {% block content %}
-<section>
-    <h1>Datasets</h1>
+<section class="datasets">
+    <h1>Available Datasets</h1>
     <ul>
         {% for dataset in datasets %}
-            <li>{{ dataset }}</li>
+        <li>
+            <a href="{{ url_for('dataset_detail', filename=dataset) }}">{{ dataset }}</a>
+        </li>
         {% endfor %}
     </ul>
 </section>

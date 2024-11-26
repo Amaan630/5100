@@ -148,3 +148,34 @@ button:hover {
     font-weight: bold;
     display: inline-block;
 }
+
+.datasets ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.datasets ul li {
+    margin: 10px 0;
+}
+
+.datasets ul li a {
+    color: #1da1f2;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.dataset-detail table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.dataset-detail th, .dataset-detail td {
+    border: 1px solid #b5a8a8;
+    padding: 8px;
+}
+
+.dataset-detail th {
+    background-color: #b5a8a8;
+    text-align: left;
+}
