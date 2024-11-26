@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Datasets - X Platform{% endblock %}
+
+{% block content %}
+<section>
+    <h1>Datasets</h1>
+    <ul>
+        {% for dataset in datasets %}
+            <li>{{ dataset }}</li>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock %}

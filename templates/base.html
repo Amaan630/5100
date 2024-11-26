@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}X Platform{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <div class="logo">𝕏</div>
+            <ul class="menu">
+                <li><a href="{{ url_for('home') }}" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
+                <li><a href="{{ url_for('visualizations') }}" class="{% if request.path == '/visualizations' %}active{% endif %}">Visualizations</a></li>
+                <li><a href="{{ url_for('datasets') }}" class="{% if request.path == '/datasets' %}active{% endif %}">Datasets</a></li>
+            </ul>
+        </nav>
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+</body>
+</html>

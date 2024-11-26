@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Home - X Platform{% endblock %}
+
+{% block content %}
+<section class="compose-tweet">
+    <form action="/generate" method="post">
+        <textarea name="tweet" maxlength="280" placeholder="What's happening?">{{ tweet }}</textarea>
+        <div class="actions">
+            <span class="char-count">{{ tweet|length }} / 280</span>
+            <button type="submit">Generate</button>
+        </div>
+    </form>
+</section>
+<section class="generated-hashtags">
+    <h3>Generated Hashtags:</h3>
+    <div class="hashtags">
+        {% if hashtags %}
+            {% for hashtag in hashtags %}
+                <span class="hashtag">{{ hashtag }}</span>
+            {% endfor %}
+        {% else %}
+            <p>No hashtags generated yet.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
