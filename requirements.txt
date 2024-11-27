@@ -12,3 +12,4 @@ networkx~=3.4.2
 textblob~=0.18.0.post0
 langdetect~=1.0.9
 emoji~=2.14.0
+numpy~=2.0.0

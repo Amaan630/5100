@@ -1,0 +1,6 @@
+# ignore all dotfiles EXCEPT .gitignore:
+.*
+!.gitignore
+
+# ignore cache directory
+cache/
