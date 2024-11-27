@@ -53,9 +53,15 @@ def clean_text(text):
     text = re.sub(r"http\S+|www\S+|https\S+", '', text, flags=re.MULTILINE)
 
     # Remove mentions (words starting with '@') and hashtags (words starting with '#')
-    text = re.sub(r'@\w+|#\w+', '', text)
+    # This will remove mentions like @username, @IG username, #hashtag, and any surrounding symbols.
+    text = re.sub(
+        r'[\{\}\[\]\(\)<>\s]*@[\w]+(?:[\s]*[\w]+)*[\{\}\[\]\(\)<>\s]*', '',
+        text)  # Remove mentions and surrounding characters
 
-    # Remove punctuation and numbers
+    # Remove any remaining mentions or hashtags (e.g., '@username' or '#hashtag')
+    text = re.sub(r'[@#]\w+', '', text)
+
+    # Remove punctuation and numbers (except for words and spaces)
     text = re.sub(r'[^A-Za-z\s]', '', text)
 
     # Remove emojis (you should define your `remove_emojis` function)
@@ -70,7 +76,6 @@ def clean_text(text):
     text = " ".join([lemmatizer.lemmatize(word) for word in text.split()])
 
     return text
-
 
 
 def preprocess_file(file_path, text_column, output_dir):
