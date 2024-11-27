@@ -5,7 +5,6 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from langdetect import detect
-from collections import Counter
 import emoji
 
 # Download necessary nltk data
@@ -54,8 +53,7 @@ def clean_text(text):
 
     # Remove mentions (words starting with '@') and hashtags (words starting with '#')
     # This will remove mentions like @username, @IG username, #hashtag, and any surrounding symbols.
-    text = re.sub(
-        r'[\{\}\[\]\(\)<>\s]*@[\w]+(?:[\s]*[\w]+)*[\{\}\[\]\(\)<>\s]*', '',
+    text = re.sub(r'[\{\}\[\]\(\)<>\s]*@[\w]+(?:[\s]*[\w]+)*[\{\}\[\]\(\)<>\s]*', '',
         text)  # Remove mentions and surrounding characters
 
     # Remove any remaining mentions or hashtags (e.g., '@username' or '#hashtag')
