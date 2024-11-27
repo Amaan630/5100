@@ -43,17 +43,39 @@ def filter_non_english(text):
     except:
         return False
 
+
 def clean_text(text):
     """Clean text by removing URLs, mentions, hashtags, punctuation, stop words, specific words ('username', 'url'), and applying lemmatization."""
-    text = text.lower()  # Convert to lowercase
-    text = re.sub(r"http\S+|www\S+|https\S+", '', text, flags=re.MULTILINE)  # Remove URLs
-    text = re.sub(r'\@\w+|\#', '', text)  # Remove mentions and hashtags
-    text = re.sub(r'[^A-Za-z\s]', '', text)  # Remove punctuation and numbers
-    text = remove_emojis(text)  # Remove emojis
-    text = " ".join([word for word in text.split() if word not in stop_words and word not in {"username", "url","via","new"}])  # Remove stop words and specific words
-    text = " ".join([lemmatizer.lemmatize(word) for word in text.split()])  # Lemmatization
-    return text
 
+    text = text.lower()  # Convert to lowercase
+
+    # Remove URLs
+    text = re.sub(r"http\S+|www\S+|https\S+", '', text, flags=re.MULTILINE)
+
+    # Remove mentions (words starting with '@') and hashtags (words starting with '#')
+    # This will remove mentions like @username, @IG username, #hashtag, and any surrounding symbols.
+    text = re.sub(
+        r'[\{\}\[\]\(\)<>\s]*@[\w]+(?:[\s]*[\w]+)*[\{\}\[\]\(\)<>\s]*', '',
+        text)  # Remove mentions and surrounding characters
+
+    # Remove any remaining mentions or hashtags (e.g., '@username' or '#hashtag')
+    text = re.sub(r'[@#]\w+', '', text)
+
+    # Remove punctuation and numbers (except for words and spaces)
+    text = re.sub(r'[^A-Za-z\s]', '', text)
+
+    # Remove emojis (you should define your `remove_emojis` function)
+    text = remove_emojis(text)
+
+    # Remove stop words and specific words like 'username', 'url', 'via', 'new'
+    text = " ".join([word for word in text.split() if
+                     word not in stop_words and word not in {"username", "url",
+                                                             "via", "new"}])
+
+    # Lemmatization (assuming `lemmatizer` is defined)
+    text = " ".join([lemmatizer.lemmatize(word) for word in text.split()])
+
+    return text
 
 
 def preprocess_file(file_path, text_column, output_dir):
