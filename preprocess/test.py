@@ -5,11 +5,11 @@ import os
 def main():
   current_dir = os.path.dirname(os.path.abspath(__file__))
 
-  data_folder = os.path.join(current_dir, "../data/data")
+  data_folder = os.path.join(current_dir, "../data/data/public_datasets/2")
 
-  preprocess_folder(data_folder,"text",data_folder+"/preprocessed")
+  preprocess_folder(data_folder,"text",data_folder+"/preprocessed/new_folder/")
 
-  perform_eda(data_folder+"/preprocessed/combined_preprocessed.csv","cleaned_text")
+  perform_eda(data_folder+"/preprocessed/new_folder/combined_preprocessed.csv","cleaned_text")
 
 if __name__ == "__main__":
   main()

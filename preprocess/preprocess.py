@@ -47,6 +47,8 @@ def filter_non_english(text):
         return False
 
 
+
+
 # Add bigram generation function
 def generate_bigrams(tokenized_texts, min_count=5, threshold=10):
     """Generate bigrams from tokenized texts."""
@@ -88,6 +90,7 @@ def clean_text(text):
     return text
 
 
+
 def preprocess_file(file_path, text_column, output_dir):
     """Preprocess a single CSV file and add a 'topic' column."""
     print(f"Processing file: {file_path}")
@@ -117,7 +120,6 @@ def preprocess_file(file_path, text_column, output_dir):
     # Filter rare and common words
     #print("Filtering rare and common words...")
     #filtered_texts = filter_words_by_document_frequency(bigram_texts)
-
 
     # Join tokens back to strings
     df['cleaned_text'] = [' '.join(doc) for doc in bigram_texts]
