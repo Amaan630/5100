@@ -2,6 +2,10 @@ import os
 import pandas as pd
 
 """
+Dataset obtained at:
+https://huggingface.co/datasets/cardiffnlp/tweet_topic_multi/blob/main/dataset/split_random/train_random.multi.json
+
+
 use this file to get the number of rows in each csv file in the data directory
 
 helpful for figuring out which files to use in preprocessing.

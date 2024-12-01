@@ -71,18 +71,18 @@ main {
     border: 1px solid #2f3336;
     border-radius: 15px;
     padding: 15px;
-    width: 100%;
     margin-bottom: 20px;
 }
 
 textarea {
-    width: 100%;
+    width: 97%;
     border: none;
     background-color: #121212;
     color: #d9d9d9;
     font-size: 16px;
     padding: 10px;
     border-radius: 10px;
+    border: 1px solid transparent;
     resize: none;
     height: 80px;
 }
@@ -147,4 +147,35 @@ button:hover {
     font-size: 14px;
     font-weight: bold;
     display: inline-block;
+}
+
+.datasets ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.datasets ul li {
+    margin: 10px 0;
+}
+
+.datasets ul li a {
+    color: #1da1f2;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.dataset-detail table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.dataset-detail th, .dataset-detail td {
+    border: 1px solid #b5a8a8;
+    padding: 8px;
+}
+
+.dataset-detail th {
+    background-color: #b5a8a8;
+    text-align: left;
 }

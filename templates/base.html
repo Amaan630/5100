@@ -11,9 +11,9 @@
         <nav class="sidebar">
             <div class="logo">𝕏</div>
             <ul class="menu">
-                <li><a href="{{ url_for('home') }}" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
-                <li><a href="{{ url_for('visualizations') }}" class="{% if request.path == '/visualizations' %}active{% endif %}">Visualizations</a></li>
-                <li><a href="{{ url_for('datasets') }}" class="{% if request.path == '/datasets' %}active{% endif %}">Datasets</a></li>
+                <li><a href="{{ url_for('home') }}" class="{% if request.path == url_for('home') %}active{% endif %}">Home</a></li>
+                <li><a href="{{ url_for('visualizations') }}" class="{% if request.path == url_for('visualizations') %}active{% endif %}">Visualizations</a></li>
+                <li><a href="{{ url_for('datasets') }}" class="{% if request.path == url_for('datasets') %}active{% endif %}">Datasets</a></li>
             </ul>
         </nav>
         <main>
