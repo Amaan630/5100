@@ -10,17 +10,18 @@ DATASET_FOLDER = "data/data/preprocessed/"
 
 @app.route('/')
 def home():
-    return render_template('home.html', tweet='', hashtags=[])
+    return render_template('home.html', tweet='', topics=[], hashtags=[])
 
 @app.route('/generate', methods=['POST'])
 def generate_hashtags():
     user_tweet = request.form.get('tweet', '')
 
+    topics = ['Arts', 'Culture', 'Poetry'] if user_tweet else []
     recommender = HashtagRecommender()
     recommender.initialize()
     hashtags = recommender.get_top_hashtags(user_tweet)
 
-    return render_template('home.html', tweet=user_tweet, hashtags=hashtags)
+    return render_template('home.html', tweet=user_tweet, topics=topics, hashtags=hashtags)
 
 @app.route('/visualizations')
 def visualizations():

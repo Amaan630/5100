@@ -12,6 +12,22 @@
         </div>
     </form>
 </section>
+
+<section class="detected-topics"></section>
+    <h3>Topics Detected:</h3>
+    <div class="topics">
+        {% if topics %}
+            <ul>
+                {% for topic in topics %}
+                    <li>{{ topic }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No topics detected yet.</p>
+        {% endif %}
+    </div>
+</section>
+
 <section class="generated-hashtags">
     <h3>Generated Hashtags:</h3>
     <div class="hashtags">
