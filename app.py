@@ -2,7 +2,7 @@ import os
 import pandas as pd
 from flask import Flask, render_template, request
 
-from vectorization.vectorizer import HashtagRecommender
+from vectorization.vectorizer import HashtagRecommender, Vectorizer
 
 app = Flask(__name__)
 

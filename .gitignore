@@ -4,3 +4,6 @@
 
 # ignore cache directory
 cache/
+
+# ignore ANY pycache directory anywhere
+*.pyc
