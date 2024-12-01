@@ -11,8 +11,9 @@ import pandas as pd
 import numpy as np
 
 
-SIMILAR_DOCS_TO_CONSIDER = 1  # Number of similar documents to pull hashtags from
-HASHTAGS_TO_RETURN = 3  # Number of hashtags to return per request
+SIMILAR_DOCS_TO_CONSIDER = 1  # number of similar documents to pull hashtags from
+HASHTAGS_TO_RETURN = 3
+DATA_FILES_TO_USE = ["data/data/processed/lda_processed_round_1.csv"]
 
 
 class Vectorizer:
@@ -178,16 +179,16 @@ class HashtagRecommender:
         self.texts = None
         self.vector_cache_path = "cache/vectors.pkl"
         self.hashtag_cache_path = "cache/hashtags.pkl"
+        self.data_files = DATA_FILES_TO_USE
 
         # create cache directory if it doesn't exist
         os.makedirs("cache", exist_ok=True)
 
     def _load_and_process_csvs(self) -> None:
-        """Load all CSVs from data/data directory and process them"""
+        """Load specified CSV files and process them"""
         all_texts = []
 
-        data_dir = Path("data/data/processed")
-        for csv_file in data_dir.glob("*.csv"):
+        for csv_file in self.data_files:
             df = pd.read_csv(csv_file)
             if "lda_processed_text" in df.columns:
                 all_texts.extend(df["lda_processed_text"].tolist())
