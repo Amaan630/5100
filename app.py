@@ -2,6 +2,8 @@ import os
 import pandas as pd
 from flask import Flask, render_template, request
 
+from vectorization.vectorizer import HashtagRecommender
+
 app = Flask(__name__)
 
 DATASET_FOLDER = "data/data/preprocessed/"
@@ -13,13 +15,10 @@ def home():
 @app.route('/generate', methods=['POST'])
 def generate_hashtags():
     user_tweet = request.form.get('tweet', '')
-    
-    # Placeholder logic for generating hashtags
-    if user_tweet:
-        words = user_tweet.split()
-        hashtags = [f"#{word.capitalize()}" for word in words[:3]]  # Generate hashtags from first 3 words
-    else:
-        hashtags = ['#Example', '#Hashtag', '#Generation']
+
+    recommender = HashtagRecommender()
+    recommender.initialize()
+    hashtags = recommender.get_top_hashtags(user_tweet)
 
     return render_template('home.html', tweet=user_tweet, hashtags=hashtags)
 
