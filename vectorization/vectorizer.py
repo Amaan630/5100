@@ -12,98 +12,49 @@ import numpy as np
 
 
 SIMILAR_DOCS_TO_CONSIDER = 1  # number of similar documents to pull hashtags from
-HASHTAGS_TO_RETURN = 3
+HASHTAGS_TO_RETURN = 5
 DATA_FILES_TO_USE = ["data/data/processed/lda_processed_round_1.csv"]
 
 
 class Vectorizer:
 
-    # The Vectorizer class is a custom implementation of a vectorizer that was designed with assistance from
-    # generative ai tools. The idea of building a custom implementation was to get more experience with the
-    # lower level details, rather than just pulling in a library.
     #
-    # Important features of how it works:
+    # the vectorizer implements a bag-of-words (bow) approach with bm25 weighting, designed
+    # for matching documents where word order is not significant.
     #
-    # => n-grams and subwords: the class generates n-grams (combinations of n words) and subwords (parts of words)
-    #    to capture more context and meaning from the text.
+    # key features:
     #
-    # => BM25 weighting: the class uses the BM25 algorithm, a popular information retrieval method, to compute the
-    #    importance of words in a document relative to a collection of documents. This helps in identifying
-    #    which words are more significant in the context of the entire dataset.
+    # => bag-of-words: treats each document as an unordered collection of words, which is
+    #    appropriate for our use case where input data contains randomly ordered words.
     #
-    # => context vectors: the class also considers the context of each word by looking at surrounding words
-    #    within a specified window size. This adds more depth to the vector representation.
+    # => bm25 weighting: uses the bm25 algorithm to compute word importance relative to the
+    #    document collection. this helps identify significant words while reducing the impact
+    #    of common terms.
     #
-    # => document vectors: after processing, each document (tweet) is represented as a vector, which can be
-    #    used to compute similarities with other documents, aiding in tasks like finding related hashtags.
+    # => normalized vectors: final document vectors are normalized to ensure consistent
+    #    similarity computations regardless of document length.
+    #
 
     def __init__(
         self,
-        ngram_range: Tuple[int, int] = (1, 3),
-        window_size: int = 4,
         k1: float = 1.5,
         b: float = 0.75,
     ):
         self.vocabulary = {}  # word -> index mapping
         self.idf = None  # inverse document frequency
         self.doc_vectors = None  # document vectors
-        self.ngram_range = ngram_range
-        self.window_size = window_size
-        self.k1 = k1  # BM25 parameter
-        self.b = b  # BM25 parameter
+        self.k1 = k1  # bm25 parameter
+        self.b = b  # bm25 parameter
         self.avg_doc_length = 0
 
-    def _get_ngrams(self, tokens: List[str]) -> List[str]:
-        """Generate n-grams from tokens"""
-        ngrams = []
-        for n in range(self.ngram_range[0], self.ngram_range[1] + 1):
-            for i in range(len(tokens) - n + 1):
-                ngrams.append("_".join(tokens[i : i + n]))
-        return ngrams
-
-    def _get_subwords(self, word: str, min_len: int = 3) -> Set[str]:
-        """Generate subwords for a given word"""
-        subwords = set()
-        for i in range(len(word)):
-            for j in range(i + min_len, min(i + 10, len(word) + 1)):
-                subwords.add(word[i:j])
-        return subwords
-
     def _preprocess(self, text: str) -> List[str]:
-        """Convert text to lowercase, remove special chars, split into words"""
+        # convert text to lowercase and remove special chars
         text = text.lower()
         text = re.sub(r"[^\w\s]", " ", text)
-        tokens = text.split()
-
-        # generate n-grams and subwords
-        features = []
-        features.extend(self._get_ngrams(tokens))
-        for token in tokens:
-            features.extend(self._get_subwords(token))
-
-        return features
-
-    def _get_context_vectors(self, tokens: List[str]) -> Dict[str, np.ndarray]:
-        """Create context vectors for each token"""
-        context_vectors = defaultdict(lambda: np.zeros(len(tokens)))
-
-        for i, token in enumerate(tokens):
-            # consider window_size tokens before and after
-            start = max(0, i - self.window_size)
-            end = min(len(tokens), i + self.window_size + 1)
-
-            # add positional weighting
-            for j in range(start, end):
-                if i != j:
-                    distance = abs(i - j)
-                    weight = 1.0 / distance
-                    context_vectors[token][j] = weight
-
-        return context_vectors
+        return text.split()
 
     def fit(self, documents: List[str]):
-        """Build vocabulary and compute IDF with BM25 weighting"""
-        # build vocabulary and document frequencies
+        # build vocabulary and compute idf with bm25 weighting
         word_doc_count = Counter()
         all_words = set()
         doc_lengths = []
@@ -118,50 +69,35 @@ class Vectorizer:
         self.vocabulary = {word: idx for idx, word in enumerate(sorted(all_words))}
         self.avg_doc_length = np.mean(doc_lengths)
 
-        # compute BM25 IDF
+        # compute bm25 idf
         num_docs = len(documents)
         self.idf = np.zeros(len(self.vocabulary))
         for word, count in word_doc_count.items():
             if word in self.vocabulary:
-                # BM25 IDF formula
                 self.idf[self.vocabulary[word]] = log(
                     (num_docs - count + 0.5) / (count + 0.5) + 1.0
                 )
 
     def transform(self, documents: List[str]) -> np.ndarray:
-        """Convert documents to vectors using improved features"""
         if not self.vocabulary or self.idf is None:
-            raise ValueError("Vectorizer must be fit before transform")
+            raise ValueError("vectorizer must be fit before transform")
 
         vectors = np.zeros((len(documents), len(self.vocabulary)))
 
         for doc_idx, doc in enumerate(documents):
             tokens = self._preprocess(doc)
             doc_length = len(tokens)
-
-            # get term frequencies
             word_counts = Counter(tokens)
 
-            # get context vectors
-            context_vectors = self._get_context_vectors(tokens)
-
-            # compute BM25 scores with context weighting
             for word, count in word_counts.items():
                 if word in self.vocabulary:
                     word_idx = self.vocabulary[word]
-
-                    # BM25 term frequency component
+                    # compute bm25 term frequency
                     tf = (count * (self.k1 + 1)) / (
                         count
                         + self.k1
                         * (1 - self.b + self.b * doc_length / self.avg_doc_length)
                     )
-
-                    # add context influence
-                    if word in context_vectors:
-                        context_weight = np.mean(context_vectors[word])
-                        tf *= 1 + context_weight
-
                     vectors[doc_idx, word_idx] = tf * self.idf[word_idx]
 
         # normalize vectors
