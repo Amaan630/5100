@@ -6,7 +6,7 @@ from vectorization.vectorizer import HashtagRecommender, Vectorizer
 
 app = Flask(__name__)
 
-DATASET_FOLDER = "data/data/preprocessed/"
+DATASET_FOLDER = "data/preprocessed/"
 
 @app.route('/')
 def home():

@@ -13,3 +13,6 @@ textblob~=0.18.0.post0
 langdetect~=1.0.9
 emoji~=2.14.0
 numpy~=2.0.0
+scipy~=1.11.1
+scikit-learn~=1.5.2
+seaborn~=0.13.0

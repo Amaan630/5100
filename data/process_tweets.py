@@ -7,7 +7,7 @@ from collections import defaultdict
 tweets_by_label = defaultdict(list)
 
 cwd = os.getcwd()
-with open(f'{cwd}/data/data/dataset.json', 'r', encoding='utf-8') as f:
+with open(f'{cwd}/data/dataset.json', 'r', encoding='utf-8') as f:
     for line in f:
         tweet = json.loads(line)
         hashtags = re.findall(r'#(\w+)', tweet['text'])
@@ -21,7 +21,7 @@ with open(f'{cwd}/data/data/dataset.json', 'r', encoding='utf-8') as f:
 
 for label, tweets in tweets_by_label.items():
     filename = label.lower().replace(' ', '_').replace('&', 'and')
-    output_path = f'{cwd}/data/data/{filename}.csv'
+    output_path = f'{cwd}/data/{filename}.csv'
     
     new_df = pd.DataFrame(tweets)
     

@@ -13,7 +13,7 @@ import numpy as np
 
 SIMILAR_DOCS_TO_CONSIDER = 1  # number of similar documents to pull hashtags from
 HASHTAGS_TO_RETURN = 5
-DATA_FILES_TO_USE = ["data/data/processed/lda_processed_round_1.csv"]
+DATA_FILES_TO_USE = ["data/processed/lda_processed_round_1.csv"]
 
 
 class Vectorizer:
