@@ -2,20 +2,23 @@ import os
 import pandas as pd
 import re
 import nltk
-from nltk.corpus import stopwords
+from nltk.corpus import stopwords, words
 from nltk.stem import WordNetLemmatizer
 from langdetect import detect
-from collections import Counter
 import emoji
+from gensim.models.phrases import Phrases, Phraser
 
 # Download necessary nltk data
 nltk.download('stopwords')
 nltk.download('wordnet')
 nltk.download('averaged_perceptron_tagger')
+nltk.download('words')
 
 # Initialize the lemmatizer and stop words
 lemmatizer = WordNetLemmatizer()
 stop_words = set(stopwords.words("english"))
+correct_words = set(words.words())  # Use a set for faster lookups
+
 
 def load_data(file_path):
   """Load the dataset."""
@@ -44,6 +47,16 @@ def filter_non_english(text):
         return False
 
 
+
+
+# Add bigram generation function
+def generate_bigrams(tokenized_texts, min_count=5, threshold=10):
+    """Generate bigrams from tokenized texts."""
+    bigram_model = Phrases(tokenized_texts, min_count=min_count,
+                           threshold=threshold)
+    bigram_phraser = Phraser(bigram_model)
+    return [bigram_phraser[text] for text in tokenized_texts]
+
 def clean_text(text):
     """Clean text by removing URLs, mentions, hashtags, punctuation, stop words, specific words ('username', 'url'), and applying lemmatization."""
 
@@ -54,15 +67,14 @@ def clean_text(text):
 
     # Remove mentions (words starting with '@') and hashtags (words starting with '#')
     # This will remove mentions like @username, @IG username, #hashtag, and any surrounding symbols.
-    text = re.sub(
-        r'[\{\}\[\]\(\)<>\s]*@[\w]+(?:[\s]*[\w]+)*[\{\}\[\]\(\)<>\s]*', '',
+    text = re.sub(r'[\{\}\[\]\(\)<>\s]*@[\w]+(?:[\s]*[\w]+)*[\{\}\[\]\(\)<>\s]*', '',
         text)  # Remove mentions and surrounding characters
 
     # Remove any remaining mentions or hashtags (e.g., '@username' or '#hashtag')
     text = re.sub(r'[@#]\w+', '', text)
 
     # Remove punctuation and numbers (except for words and spaces)
-    text = re.sub(r'[^A-Za-z\s]', '', text)
+    text = re.sub(r'[^A-Za-z\s]', ' ', text)
 
     # Remove emojis (you should define your `remove_emojis` function)
     text = remove_emojis(text)
@@ -76,6 +88,7 @@ def clean_text(text):
     text = " ".join([lemmatizer.lemmatize(word) for word in text.split()])
 
     return text
+
 
 
 def preprocess_file(file_path, text_column, output_dir):
@@ -95,6 +108,21 @@ def preprocess_file(file_path, text_column, output_dir):
     # Clean the text column
     print("Cleaning text data...")
     df['cleaned_text'] = df[text_column].apply(clean_text)
+
+    # Tokenize the text
+    print("Tokenizing text...")
+    tokenized_texts = df['cleaned_text'].apply(lambda x: x.split())
+
+    # Generate bigrams
+    print("Generating bigrams...")
+    bigram_texts = generate_bigrams(tokenized_texts)
+
+    # Filter rare and common words
+    #print("Filtering rare and common words...")
+    #filtered_texts = filter_words_by_document_frequency(bigram_texts)
+
+    # Join tokens back to strings
+    df['cleaned_text'] = [' '.join(doc) for doc in bigram_texts]
 
     # Drop the original text column
     df.drop(text_column, axis=1, inplace=True)
