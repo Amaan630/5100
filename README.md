@@ -32,8 +32,7 @@ Open the browser and navigate to http://127.0.0.1:5000/ to see the web app.
   - [3. Data Preparation](#3-data-preparation)
   - [4. Training the LDA Model](#4-training-the-lda-model)
   - [5. Model Testing](#5-model-testing)
-  - [6. Post-processing](#6-post-processing)
-  - [7. Visualization](#7-visualization)
+  - [6. Visualization](#7-visualization)
 - [Setup and Installation](#setup-and-installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
@@ -93,31 +92,17 @@ app.py  # flask app to serve the web app
 
 ### 4. Training the LDA Model
 - Implementation of Latent Dirichlet Allocation using Variational Bayes
-- Hyperparameter tuning (alpha=0.05, beta=0.01)
+- Hyperparameter tuning (alpha, beta)
 - Topic modeling with configurable number of topics
 - Iterative training process with convergence monitoring
 - Generation of topic-word distributions
 
 ### 5. Model Testing
 - Evaluation of topic coherence
-- Analysis of topic distributions
-- Validation using held-out test set
 - Assessment of model convergence
-- Word cloud visualization of topics
 
-### 6. Post-processing
-- Topic interpretation and labeling
-- Hashtag generation from topic words
-- Sentiment analysis of tweets
-- Topic trend analysis over time
-- Visualization of results
-
-### 7. Visualization
+### 6. Visualization
 - Interactive web interface using Flask
-- Word clouds for topic visualization
-- Topic distribution plots
-- Sentiment analysis results
-- Dataset exploration tools
 
 
 ## Setup and Installation
