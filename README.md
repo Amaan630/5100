@@ -21,7 +21,7 @@ python app.py
 Open the browser and navigate to http://127.0.0.1:5000/ to see the web app.
 
 ## Flowchart
-![Alt text](Flowchart.png?raw=true "Title")
+![Alt text](HighLevelDiagram.png?raw=true "Title")
 
 ## Table of Contents
 - [Project Overview](#project-overview)
