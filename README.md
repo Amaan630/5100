@@ -45,6 +45,7 @@ The goal of this project is to:
 - Perform sentiment analysis and other post-processing tasks to gain insights into tweet content.
 - Visualize results using a graphical user interface.
 
+```
 ## Folder Structure
 ├── data/  
 │   ├── preprocessed/ # Data after preprocessing and removing noise from the original data  
@@ -72,7 +73,7 @@ The goal of this project is to:
 │   ├── *  # Contains logic to vectorize the data  
 │
 ├── app.py  # Flask application to serve the web app  
-
+```
 
 ## Workflow
 
