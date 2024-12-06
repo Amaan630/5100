@@ -46,31 +46,33 @@ The goal of this project is to:
 - Visualize results using a graphical user interface.
 
 ## Folder Structure
+├── data/  
+│   ├── preprocessed/ # Data after preprocessing and removing noise from the original data  
+│   ├── processed/  # Data after applying the LDA which is used to generate hashtags
+│   ├── dataset.json  # Raw dataset obtained from HuggingFace: https://huggingface.co/datasets/cardiffnlp/tweet_topic_multi/blob/main/dataset/split_random/train_random.multi.json  
+│   ├── process_tweets.py  # Script to process the raw dataset into CSV files  
+│   ├── query_rows.py  # Script to get the number of rows in each CSV file (for reference)  
+│   ├── *.csv  # Raw CSV datasets generated from the `process_tweets.py` script  
+│
+├── models/  
+│   ├── trained_lda_model/  # Contains the trained LDA model  
+│
+├── preprocess/  
+│   ├── preprocess.py  # Preprocess the dataset and create a new CSV file with preprocessed text  
+│   ├── denoising.py  # Remove additional noise from the data  
+│   ├── eda.py  # Perform Exploratory Data Analysis (EDA) to better understand the data  
+│
+├── static/  
+│   ├── *  # Contains static files (e.g., CSS, JavaScript) for the web app (styling)  
+│
+├── templates/  
+│   ├── *  # Contains HTML templates for the web app  
+│
+├── vectorization/  
+│   ├── *  # Contains logic to vectorize the data  
+│
+├── app.py  # Flask application to serve the web app  
 
-```
-data/  # contains datasets, both preprocessed and raw
-    preprocessed/
-    processed/
-    dataset.json  # raw dataset obtained from https://huggingface.co/datasets/cardiffnlp/tweet_topic_multi/blob/main/dataset/split_random/train_random.multi.json
-    process_tweets.py  # script to process the raw dataset into csv files
-    query_rows.py  # script to get the number of rows in each csv file in the data directory. it is just for reference.
-    *.csv  # raw csv datasets generated from the process_tweets.py script
-
-models/  # contains the trained LDA model
-
-preprocess/  # contains the logic to preprocess the data
-    preprocess.py #Preprocess the dataset and create a new csv file with the preprocessed text
-    denoising.py #Remove additional noise from the data
-    eda.py #Performing the Exploratory Data Analysis to further understand the data
-
-static/  # contains static files for the web app (styling)
-
-templates/  # contains html templates for the web app
-
-vectorization/  # contains the logic to vectorize the data
-
-app.py  # flask app to serve the web app
-```
 
 ## Workflow
 
