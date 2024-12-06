@@ -59,6 +59,9 @@ data/  # contains datasets, both preprocessed and raw
 models/  # contains the trained LDA model
 
 preprocess/  # contains the logic to preprocess the data
+    preprocess.py #Preprocess the dataset and create a new csv file with the preprocessed text
+    denoising.py #Remove additional noise from the data
+    eda.py #Performing the Exploratory Data Analysis to further understand the data
 
 static/  # contains static files for the web app (styling)
 
