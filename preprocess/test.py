@@ -5,7 +5,7 @@ import os
 def main():
   current_dir = os.path.dirname(os.path.abspath(__file__))
 
-  data_folder = os.path.join(current_dir, "../data/data")
+  data_folder = os.path.join(current_dir, "../data")
 
   preprocess_folder(data_folder,"text",data_folder+"/preprocessed")
 

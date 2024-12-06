@@ -71,18 +71,18 @@ main {
     border: 1px solid #2f3336;
     border-radius: 15px;
     padding: 15px;
-    width: 100%;
     margin-bottom: 20px;
 }
 
 textarea {
-    width: 100%;
+    width: 97%;
     border: none;
     background-color: #121212;
     color: #d9d9d9;
     font-size: 16px;
     padding: 10px;
     border-radius: 10px;
+    border: 1px solid transparent;
     resize: none;
     height: 80px;
 }
