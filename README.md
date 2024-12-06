@@ -57,7 +57,7 @@ The goal of this project is to:
 │   ├── *.csv  # Raw CSV datasets generated from the `process_tweets.py` script  
 │
 ├── models/  
-│   ├── trained_lda_model/  # Contains the trained LDA model  
+│   ├── LDA_VI.py/  # Contains the trained LDA model with variational inference
 │
 ├── preprocess/  
 │   ├── preprocess.py  # Preprocess the dataset and create a new CSV file with preprocessed text  
