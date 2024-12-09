@@ -1,4 +1,4 @@
-# Social media Topic modeling and Hashtag generation using LDA
+# Enhancing Twitter Hashtag Generation with Topic Modeling via LDA and Vector-Based Retrieval-Augmented Generation (RAG)
 
 This project aims to analyze a collection of tweets to uncover underlying topics, trends, and sentiments. Social media platforms like Twitter contain vast amounts of unstructured text data that can provide valuable insights into public opinion, trending topics, and sentiment distribution. We employ the Latent Dirichlet Allocation (LDA) model to extract latent topics within tweets, followed by various post-processing analyses to provide a comprehensive view of the data. This pipeline allows us to transform raw tweets into actionable insights through structured data analysis and visualization.
 
